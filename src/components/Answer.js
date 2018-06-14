@@ -6,10 +6,14 @@ class Answer extends React.Component {
     const { nextGame } = this.props;
     return (
       <React.Fragment>
-        <div>
-          THAT'S RIGHT!
-          <br />
-          <button onClick={nextGame}>NEXT COLOR</button>
+        <div className="modal">
+          <div className="modal-right">
+            THAT'S RIGHT!
+            <br />
+            <button className="close" onClick={nextGame}>
+              NEXT COLOR
+            </button>
+          </div>
         </div>
       </React.Fragment>
     );

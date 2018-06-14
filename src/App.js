@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Answer from "./components/Answer";
+import Wrong from "./components/Wrong";
 
 // 메소드처럼 사용할 것이 아니라면 함수를 꼭 안에서만 정의할 필요는 없다.
 function randomNumber() {
@@ -87,7 +88,7 @@ class App extends Component {
         ) : this.state.page === "Answer" ? (
           <Answer nextGame={this.nextGame} />
         ) : (
-          <div>오답쓰맨!</div>
+          <Wrong score={this.state.score} />
         )}
       </React.Fragment>
     );
