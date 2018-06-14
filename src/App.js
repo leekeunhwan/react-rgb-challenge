@@ -15,29 +15,38 @@ class App extends Component {
   state = {
     page: "game",
     score: 0,
-    box: [],
-    answer: ""
+    question: [],
+    answer: "",
+    round: 0
   };
-  
+
   componentWillMount() {
-    this.setState({
-      box: [randomColorCode(), randomColorCode(), randomColorCode()]
-    });
+    this.makeQuestion();
   }
 
   componentDidMount() {
-    this.setState({
-      answer: this.state.box[Math.floor(Math.random() * 3)]
-    });
+    this.makeAnswer();
   }
 
+  makeQuestion = () => {
+    this.setState({
+      question: [randomColorCode(), randomColorCode(), randomColorCode()]
+    });
+  };
+
+  makeAnswer = () => {
+    this.setState({
+      answer: this.state.question[Math.floor(Math.random() * 3)]
+    });
+  };
+
   handleBoxClick = e => {
-    console.log(e.target.style.backgroundColor);
     if (this.state.answer === e.target.style.backgroundColor) {
       this.setState({
         page: "Answer",
         score: this.state.score + 1
       });
+      this.makeQuestion();
     } else {
       this.setState({
         page: "Wrong"
@@ -46,9 +55,8 @@ class App extends Component {
   };
 
   nextGame = () => {
-    this.setState({
-      page: "game"
-    });
+    this.setState({ page: "game", round: this.state.round + 1 });
+    this.makeAnswer();
   };
 
   render() {
@@ -67,15 +75,13 @@ class App extends Component {
             </div>
             <div className="score">Score : {this.state.score}</div>
             <div className="color-code">{this.state.answer}</div>
-            {this.state.box.map((item, index) => (
+            {this.state.question.map((item, index) => (
               <div
                 className="game-box"
                 key={index}
                 style={{ backgroundColor: `${item}` }}
                 onClick={this.handleBoxClick}
-              >
-                {item}
-              </div>
+              />
             ))}
           </React.Fragment>
         ) : this.state.page === "Answer" ? (
