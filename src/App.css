@@ -9,7 +9,8 @@
 }
 
 html,
-body {
+body,
+#root {
   height: 100vh;
   margin: 0;
   overflow: hidden;
@@ -39,7 +40,8 @@ h1 span {
 .score {
   display: block;
   padding-top: 10px;
-  margin-bottom: 13em
+  margin-bottom: 10em;
+  font-size: 1.3em
 }
 
 .game {
@@ -51,17 +53,16 @@ h1 span {
 
 .game-box {
   display: inline-block;
-  margin: 0 20px;
-  height: 80px;
-  width: 80px;
+  margin: 0 15px;
+  height: 70px;
+  width: 70px;
   cursor: pointer;
-  background-color: salmon;
   transition: transform 0.45s ease;
   border-radius: 40px
 }
 
 .color-code {
-  font-size: 150%;
+  font-size: 2em;
   margin-bottom: 50px;
 }
 
@@ -71,12 +72,8 @@ h1 span {
   align-items: center;
 }
 
-.box.large {
-  transform: scale(80);
-}
-
 .modal {
-  margin-top: 20em
+  margin-top: 20em;
 }
 
 .modal-right .close {

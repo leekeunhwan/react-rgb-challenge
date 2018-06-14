@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 import Answer from "./components/Answer";
 import Wrong from "./components/Wrong";
+import Game from "./components/Game";
+import Header from "./components/Header";
 
 // 메소드처럼 사용할 것이 아니라면 함수를 꼭 안에서만 정의할 필요는 없다.
 function randomNumber() {
@@ -65,25 +67,13 @@ class App extends Component {
       <React.Fragment>
         {this.state.page === "game" ? (
           <React.Fragment>
-            <div>
-              <h1>
-                {" "}
-                The Great
-                <br />
-                <span>RGB</span>
-                <br /> guessing challenge
-              </h1>
-            </div>
-            <div className="score">Score : {this.state.score}</div>
-            <div className="color-code">{this.state.answer}</div>
-            {this.state.question.map((item, index) => (
-              <div
-                className="game-box"
-                key={index}
-                style={{ backgroundColor: `${item}` }}
-                onClick={this.handleBoxClick}
-              />
-            ))}
+            <Header />
+            <Game
+              question={this.state.question}
+              score={this.state.score}
+              answer={this.state.answer}
+              handleBoxClick={this.handleBoxClick}
+            />
           </React.Fragment>
         ) : this.state.page === "Answer" ? (
           <Answer nextGame={this.nextGame} />

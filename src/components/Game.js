@@ -13,9 +13,7 @@ class Game extends React.Component {
             key={index}
             style={{ backgroundColor: `${item}` }}
             onClick={handleBoxClick}
-          >
-            {item}
-          </div>
+          />
         ))}
       </React.Fragment>
     );
