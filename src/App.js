@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import GameContext from "./contexts/GameContext";
 import Answer from "./components/Answer";
 import Wrong from "./components/Wrong";
 import Game from "./components/Game";
@@ -15,14 +16,6 @@ function randomColorCode() {
 }
 
 class App extends Component {
-  state = {
-    page: "game",
-    score: 0,
-    question: [],
-    answer: "",
-    round: 0
-  };
-
   componentWillMount() {
     this.makeQuestion();
   }
@@ -62,25 +55,32 @@ class App extends Component {
     this.makeAnswer();
   };
 
+  state = {
+    page: "game",
+    score: 0,
+    question: [],
+    answer: "",
+    round: 0,
+    handleBoxClick: this.handleBoxClick,
+    nextGame: this.nextGame
+  };
+
   render() {
     return (
-      <React.Fragment>
-        {this.state.page === "game" ? (
-          <React.Fragment>
-            <Header />
-            <Game
-              question={this.state.question}
-              score={this.state.score}
-              answer={this.state.answer}
-              handleBoxClick={this.handleBoxClick}
-            />
-          </React.Fragment>
-        ) : this.state.page === "Answer" ? (
-          <Answer nextGame={this.nextGame} />
-        ) : (
-          <Wrong score={this.state.score} />
-        )}
-      </React.Fragment>
+      <GameContext.Provider value={this.state}>
+        <React.Fragment>
+          {this.state.page === "game" ? (
+            <React.Fragment>
+              <Header />
+              <Game />
+            </React.Fragment>
+          ) : this.state.page === "Answer" ? (
+            <Answer />
+          ) : (
+            <Wrong />
+          )}
+        </React.Fragment>
+      </GameContext.Provider>
     );
   }
 }
